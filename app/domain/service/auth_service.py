@@ -5,8 +5,8 @@ from fastapi import HTTPException, status, Response
 from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from domain.repository.user_repository import UserRepository
-from entities.entity import UserSession
+from app.domain.repository.user_repository import UserRepository
+from app.entities.entity import UserSession
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

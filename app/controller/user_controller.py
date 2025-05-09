@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
-from domain.repository.user_repository import UserRepository
-from gateways.database.connector import get_db
-from schemas.user_schema import UserCreate, UserUpdate, UserResponse
-from entities.entity import User
-from utils.auth_deps import get_current_user
-from utils.config.log import current_user_id, current_username
+
+from app.domain.repository.user_repository import UserRepository
+from app.entities.entity import User
+from app.gateways.database.connector import get_db
+from app.schemas.user_schema import UserResponse, UserCreate, UserUpdate
+from app.utils.auth_deps import get_current_user
+from app.utils.config.log import current_user_id, current_username
 
 user_router = APIRouter(prefix="/users", tags=["users"])
 

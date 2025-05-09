@@ -4,12 +4,12 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from entities.entity import User, CurrencyConversionTransaction
-from gateways.database.connector import get_db
-from gateways.external_api.apilayer_gateway import fetch_exchange_rate
-from schemas.currency_conversion_response_schema import CurrencyConversionResponse
-from utils.auth_deps import get_current_user
-from utils.config.log import get_logger
+from app.entities.entity import User, CurrencyConversionTransaction
+from app.gateways.database.connector import get_db
+from app.gateways.external_api.apilayer_gateway import fetch_exchange_rate
+from app.schemas.currency_conversion_response_schema import CurrencyConversionResponse
+from app.utils.auth_deps import get_current_user
+from app.utils.config.log import get_logger
 
 exchange_router = APIRouter(prefix="/exchange", tags=["exchange"])
 
@@ -30,6 +30,8 @@ async def convert_currency(
             status_code=400,
             detail=f"Invalid currency. Valid currencies are: {', '.join(valid_currencies)}"
         )
+    if amount < 0:
+        raise HTTPException(status_code=400, detail="Amount must be non-negative")
 
     try:
         exchange_data = fetch_exchange_rate(from_currency, to_currency, amount)
@@ -68,5 +70,3 @@ async def convert_currency(
             status_code=500,
             detail=f"Conversion failed: {str(e)}"
         )
-
-

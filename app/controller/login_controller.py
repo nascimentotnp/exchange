@@ -7,10 +7,10 @@ from starlette.requests import Request
 from starlette.responses import Response
 
 from app.domain.service.auth_service import AuthService
-from app.schemas.user_schema import UserLogin
+from app.entities.entity import UserSession
 from app.gateways.database.connector import get_db
-from app.utils.config.log import current_user_id, current_username, get_logger
-from entities.entity import UserSession
+from app.schemas.user_schema import UserLogin
+from app.utils.config.log import get_logger, current_user_id, current_username
 
 logger = get_logger(__name__)
 
@@ -53,6 +53,9 @@ async def logout(
         db: AsyncSession = Depends(get_db)
 ):
     session_id = request.cookies.get("session_id")
+
+    if not session_id:
+        raise HTTPException(status_code=401, detail="Not authenticated")
 
     if session_id:
         try:

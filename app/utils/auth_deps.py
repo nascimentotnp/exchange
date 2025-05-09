@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, status, Cookie
 from sqlalchemy.ext.asyncio import AsyncSession
-from entities.entity import User, UserSession
-from gateways.database.connector import get_db
+from app.entities.entity import User, UserSession
+from app.gateways.database.connector import get_db
 from sqlalchemy.future import select
 
 

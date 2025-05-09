@@ -1,11 +1,9 @@
 import logging
 import os
+
 import requests
 from dotenv import load_dotenv
 from fastapi import HTTPException
-from pydantic import ValidationError
-
-from schemas.api_schema import ExchangeRateResponse
 
 load_dotenv()
 APIKEY = os.getenv("APIKEY")

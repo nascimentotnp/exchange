@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 from typing import Optional
 
@@ -10,7 +12,7 @@ class CurrencyConversionResponse(BaseModel):
     to_currency: str
     amount_to: float
     exchange_rate: float
-    timestamp: str
+    timestamp: datetime
 
     class Config:
         from_attributes = True

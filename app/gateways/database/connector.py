@@ -7,8 +7,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
-from entities.entity import Base
-from gateways.database.database_gateway import engine, SessionFactory
+from app.gateways.database.database_gateway import engine, Base, SessionFactory
 
 logger = logging.getLogger(__name__)
 

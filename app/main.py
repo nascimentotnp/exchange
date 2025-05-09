@@ -2,14 +2,20 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI
 
-from app.controller.health_check_controller import health_check_router
+
+import sys
+import os
+
 from app.controller.exchange_controller import exchange_router
+from app.controller.health_check_controller import health_check_router
 from app.controller.login_controller import login_router
+from app.controller.transactions_controller import transaction_router
 from app.controller.user_controller import user_router
 from app.gateways.database.connector import init_db
 from app.utils.config.log import setup_logging
-from controller.transactions_controller import transaction_router
-from utils.config.logging_middleware import logging_middleware
+from app.utils.config.logging_middleware import logging_middleware
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 logger = setup_logging()
 
@@ -42,8 +48,8 @@ async def start_application():
     await init_db()
 
     config = uvicorn.Config(
-        "app.main:app",
-        host="0.0.0.0",
+        "main:app",
+        host="localhost",
         port=8081,
         reload=True,
         log_config=None

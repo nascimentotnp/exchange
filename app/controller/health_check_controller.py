@@ -10,7 +10,7 @@ health_check_router = APIRouter(prefix="/health", tags=["health_check"])
 health_path = os.getenv("HEALTH_CHECK", "health")
 
 
-@health_check_router.get(f'/{health_path}')
+@health_check_router.get('')
 def health_check():
     return JSONResponse(status_code=status.HTTP_200_OK,
                         content=jsonable_encoder({"message": "OK"}))

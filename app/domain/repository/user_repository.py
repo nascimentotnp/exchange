@@ -5,8 +5,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from entities.entity import User, UserSession
-from utils.password import hash_password
+from app.entities.entity import User, UserSession
+from app.utils.password import hash_password
 
 logger = logging.getLogger(__name__)
 
