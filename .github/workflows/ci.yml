@@ -25,12 +25,18 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
-          pip install -r requirements-dev.txt
 
       - name: Run lint
-        run: flake8 app
+        run: |
+          source .venv/bin/activate
+          flake8 app
 
-      - name: Run tests with coverage
+      - name: Run tests
         run: |
           source .venv/bin/activate
           pytest --cov=app --cov-report=term-missing
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
