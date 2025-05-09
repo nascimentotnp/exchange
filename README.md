@@ -124,6 +124,14 @@ Access after starting:
 - **Redoc**: http://127.0.0.1:8000/redoc
 
 
+## API Requirements
+
+- **Python 3.11++**
+- **FastAPI++**
+- **SQLAlchemy++**
+- **Pytest++**
+
+
 ## How to Run the Tests
 
 Install the test dependencies:
