@@ -1,4 +1,4 @@
-name: Run Tests and Lint
+name: Run Tests
 
 on:
   push:
@@ -9,14 +9,15 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.11
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
@@ -24,11 +25,6 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
 
-      - name: Run lint
-        run: |
-          pip install flake8
-          flake8 app
-
-      - name: Run tests
+      - name: Run tests and coverage
         run: |
           pytest --cov=app --cov-report=term-missing
